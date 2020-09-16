@@ -1,0 +1,46 @@
+<header class="header" id="home">
+  <div class="header-top">
+    <div class="container">
+      <div class="left">
+        <a (click)="otherService.openCallback()" class="header-top__link">Заказать звонок</a>
+      </div>
+      <div class="right" *ngIf="contact">
+        <p class="address">Адрес: <span>{{contact.address}}</span></p>
+        <p>Телефон: <span><a href="tel:{{contact.phone}}">{{contact.phone}}</a></span></p>
+      </div>
+    </div>
+  </div>
+  <div class="header-bottom wrap">
+    <div class="container">
+      <div class="left">
+        <div class="logo">
+          <a><img src="assets/images/logo.jpg"/></a>
+        </div>
+      </div>
+      <div class="right">
+        <nav>
+          <a href="#build" class="anchor address">О Компании</a>
+          <a href="#service" class="anchor">Направления деятельности</a>
+          <a href="#verify" class="anchor address">Сертификаты</a>
+          <a href="#callback" class="anchor address">Контакты</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<main class="content wrap">
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</main>
+
+
+<footer>
+  <div class="container">
+    <p class="address">Адрес: <span>125362, г. Москва, ул. Свободы, д. 31, стр. 1</span></p>
+    <p>Телефон: <span><a href="tel:+74951470401">+7(495)147-04-01</a></span></p>
+    <p>Email: <span><a href="mailto:info@psk-development.ru">info@psk-development.ru</a></span></p>
+  </div>
+</footer>

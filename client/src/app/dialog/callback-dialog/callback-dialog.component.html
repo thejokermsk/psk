@@ -1,0 +1,29 @@
+<div class="callback-popup" >
+  <div class="title">
+    <h2>Оставить заявку</h2>
+    <div class="close" (click)="onClose()"><span class="material-icons">close</span></div>
+  </div>
+  <div class="right">
+    <div class="input-field">
+      <label for="first_name">Ваше имя:</label>
+      <input class="page--bg-blue"id="first_name" type="text"  required/>
+    </div>
+    <div class="input-field">
+      <label for="email">Ваш e-mail:</label>
+      <input class="page--bg-blue" id="email" type="email" required/>
+    </div>
+    <div class="input-field">
+      <label for="phone">Ваш телефон:</label>
+      <input class="page--bg-blue" id="phone" type="text"/>
+    </div>
+    <div class="input-field">
+      <label for="message">Вашe сообщение:</label>
+      <textarea class="page--bg-blue" id="message" aria-required ></textarea>
+    </div>
+    <div class="wrap">
+      <button>
+        Оставить заявку
+      </button>
+    </div>
+  </div>
+</div>
