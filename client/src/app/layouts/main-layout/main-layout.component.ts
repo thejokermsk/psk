@@ -4,7 +4,7 @@ import { CallbackDialogComponent } from 'src/app/dialog/callback-dialog/callback
 import { ViewportScroller, isPlatformBrowser } from '@angular/common';
 import { OtherService } from 'src/app/services/other.service';
 import { Subscription } from 'rxjs';
-import { Contact } from 'src/app/interfaces';
+import { Contact, Categories } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-main-layout',

@@ -7,7 +7,7 @@ import { AdditionalPageComponent } from './pages/additional-page/additional-page
 const routes: Routes = [
   {path: '', component: MainLayoutComponent, children: [
     {path: '', component: IndexPageComponent},
-    {path: 'additional/:alias_id', component: AdditionalPageComponent},
+    {path: 'additional/:id', component: AdditionalPageComponent},
   ]}
 ];
 

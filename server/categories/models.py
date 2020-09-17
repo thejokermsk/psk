@@ -4,9 +4,9 @@ from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.
 class Categories(models.Model):
   name  = models.CharField(max_length=255, verbose_name='Название')
-  img_path = models.ImageField(upload_to='images/', verbose_name='Изображение')
+  img_path = models.ImageField(upload_to='assets/images/content', verbose_name='Изображение')
   description = RichTextUploadingField(verbose_name='Описание')
-  
+
   def __str__(self):
     return self.name
 
@@ -19,7 +19,7 @@ class Categories(models.Model):
 class Products(models.Model):
   category = models.ForeignKey(Categories, related_name='products', on_delete=models.CASCADE, verbose_name='Направления деятельности')
   name = models.CharField(max_length=255, verbose_name='Название')
-  img_path = models.ImageField(upload_to='images/', verbose_name='Изображение')
+  img_path = models.ImageField(upload_to='assets/images/content', verbose_name='Изображение')
 
   def __str__(self):
     return self.name
@@ -30,7 +30,7 @@ class Products(models.Model):
 
 
 class HeaderSlider(models.Model):
-  img_path = models.ImageField(upload_to='images/', verbose_name='Изображение')
+  img_path = models.ImageField(upload_to='assets/images/content', verbose_name='Изображение')
 
   class Meta:
     verbose_name = "изображения"
@@ -51,7 +51,7 @@ class Contact(models.Model):
 
 
 class Verify(models.Model):
-  img_path = models.ImageField(upload_to='images/', verbose_name='Сертификаты')
+  img_path = models.ImageField(upload_to='assets/images/content', verbose_name='Сертификаты')
 
   class Meta:
     verbose_name = "сертификат"

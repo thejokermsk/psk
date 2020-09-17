@@ -21,31 +21,11 @@
     </div>
 
     <div class="page-items">
-      <div class="page-item">
-        <img src="assets/images/content/1.jpg"/>
-        <p>Техническое обслуживание и ремонт локомотивов и их составных частей (узлов и агрегатов)</p>
-        <a (click)="otherService.openCallback()">Оставить заявку</a>
-      </div>
-      <div class="page-item">
-        <img src="assets/images/content/1.jpg"/>
-        <p>Продажа и аренда тепловозов</p>
-
-        <a href="/additional/test">Посмотреть</a>
-      </div>
-      <div class="page-item">
-        <img src="assets/images/content/1.jpg"/>
-        <p>Аренда вагонов сопровождения</p>
-        <a href="/additional/test">Посмотреть</a>
-      </div>
-      <div class="page-item">
-        <img src="assets/images/content/1.jpg"/>
-        <p>Поставка запасных частей для тягового и подвижного состава</p>
-        <a href="/additional/test">Посмотреть</a>
-      </div>
-      <div class="page-item">
-        <img src="assets/images/content/1.jpg"/>
-        <p>Поставка материалов верхнего строения пути и оборудования для сортировочных горок</p>
-        <a href="/additional/test">Посмотреть</a>
+      <div class="page-item" *ngFor="let item of categories">
+        <img src="{{item.img_path}}"/>
+        <p>{{item.name}}</p>
+        <a *ngIf="!item.callback" (click)="otherService.openCallback()">Оставить заявку</a>
+        <a *ngIf="item.callback" href="/additional/{{item.id}}">Посмотреть</a>
       </div>
     </div>
   </div>

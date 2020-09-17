@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
 import { OtherService } from 'src/app/services/other.service';
 import { Subscription } from 'rxjs';
-import { Build, Slider, Contact } from 'src/app/interfaces';
+import { Build, Slider, Contact, Categories } from 'src/app/interfaces';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
@@ -22,6 +22,7 @@ export class IndexPageComponent implements OnInit, OnDestroy{
   slider: Slider[] = []
   verify: Slider[] = []
   contact: Contact = null
+  categories: Categories[] = []
 
   ngOnInit(): void {
     if (this.isBrowser) {
@@ -29,7 +30,7 @@ export class IndexPageComponent implements OnInit, OnDestroy{
         this.slider = items
       })
 
-      this.oSub = this.otherService.getSlider().subscribe(items => {
+      this.oSub = this.otherService.getVerify().subscribe(items => {
         this.verify = items
       })
       
@@ -43,6 +44,9 @@ export class IndexPageComponent implements OnInit, OnDestroy{
       })
 
 
+      this.oSub = this.otherService.getCategories().subscribe(item => {
+        this.categories = item
+      })
     }
   }
 

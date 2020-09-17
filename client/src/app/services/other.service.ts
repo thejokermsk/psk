@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CallbackDialogComponent } from '../dialog/callback-dialog/callback-dialog.component';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Build, Slider, Contact } from '../interfaces';
+import { Build, Slider, Contact, Categories, Products } from '../interfaces';
 
 @Injectable({providedIn: 'root'})
 
@@ -37,6 +37,15 @@ export class OtherService {
   getContact(): Observable<Contact> {
     return this.http.get<Contact>('/api/contact')
   }
+
+  getCategories(): Observable<Categories[]> {
+    return this.http.get<Categories[]>('/api/categories')
+  }
+
+  getProducts(id: number): Observable<Products[]> {
+    return this.http.get<Products[]>(`/api/products/${id}`)
+  }
+
 
 
 
