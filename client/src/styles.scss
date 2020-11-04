@@ -213,7 +213,9 @@ main {
   justify-content: center;
 
 }
-
+.page-item--shadow::before {
+  background-color: rgba(0, 0, 0, .4) !important;
+}
 .page-item:before {
   content: '';
   position: absolute;

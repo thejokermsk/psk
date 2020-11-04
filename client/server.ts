@@ -46,7 +46,7 @@ export function app(): express.Express {
   server.set('view engine', 'html');
   server.set('views', distFolder);
 
-  server.get('/api/build', (req, res) => { 
+  server.get('/api/build', (req, res) => {
     connection.query('SELECT description FROM `categories_build` ORDER BY id DESC LIMIT 1', function(err, rows, fields) {
       if (rows.length === 0) {
         res.json({})
@@ -56,7 +56,7 @@ export function app(): express.Express {
     })
   });
 
-  server.get('/api/contact', (req, res) => { 
+  server.get('/api/contact', (req, res) => {
     connection.query('SELECT * FROM `categories_contact` ORDER BY id DESC LIMIT 1', function(err, rows, fields) {
       if (rows.length === 0) {
         res.json({})
@@ -65,8 +65,8 @@ export function app(): express.Express {
       res.json(rows[0]);
     })
   });
-  
-  server.get('/api/verify', (req, res) => { 
+
+  server.get('/api/verify', (req, res) => {
     connection.query('SELECT img_path FROM `categories_verify`', function(err, rows, fields) {
       if (rows.length === 0) {
         res.json([])
@@ -76,7 +76,7 @@ export function app(): express.Express {
     })
   });
 
-  server.get('/api/slider', (req, res) => { 
+  server.get('/api/slider', (req, res) => {
     connection.query('SELECT img_path FROM `categories_headerslider`', function(err, rows, fields) {
       if (rows.length === 0) {
         res.json([])
@@ -86,9 +86,9 @@ export function app(): express.Express {
     })
   });
 
-  server.get('/api/categories', (req, res) => { 
+  server.get('/api/categories', (req, res) => {
     connection.query(`
-      SELECT * FROM categories_categories; 
+      SELECT * FROM categories_categories;
       SELECT * FROM categories_products;
     `, function(err, rows, fields) {
       if (rows.length === 0) {
@@ -104,7 +104,7 @@ export function app(): express.Express {
     })
   });
 
-  server.get('/api/products/:category_id', (req, res) => { 
+  server.get('/api/products/:category_id', (req, res) => {
     connection.query('SELECT * FROM `categories_products` WHERE `category_id`=' + req.params.category_id, function(err, rows, fields) {
       if (rows.length === 0) {
         res.json([])
@@ -126,12 +126,12 @@ export function app(): express.Express {
     res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
   });
 
-  
+
   return server;
 }
 
 function run(): void {
-  const port = process.env.PORT || 4000;
+  const port = process.env.PORT || 3020;
 
   // Start up the Node server
   const server = app();

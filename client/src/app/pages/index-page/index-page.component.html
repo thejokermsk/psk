@@ -1,6 +1,6 @@
 <owl-carousel [options]="owlOptions"  [carouselClasses]="['owl-theme', 'row', 'sliding']" *ngIf="slider.length !== 0">
   <div class="item" *ngFor="let item of slider">
-    <img src="{{item.img_path}}"/>
+    <img src="/media/{{item.img_path}}"/>
   </div>
 </owl-carousel>
 
@@ -22,7 +22,7 @@
 
     <div class="page-items">
       <div class="page-item" *ngFor="let item of categories">
-        <img src="{{item.img_path}}"/>
+        <img src="/media/{{item.img_path}}"/>
         <p>{{item.name}}</p>
         <a *ngIf="!item.callback" (click)="otherService.openCallback()">Оставить заявку</a>
         <a *ngIf="item.callback" href="/additional/{{item.id}}">Посмотреть</a>
@@ -39,7 +39,7 @@
 
     <owl-carousel  [options]="owlVerifyOption"  [carouselClasses]="['owl-theme', 'row', 'sliding']" *ngIf="verify.length !== 0">
       <div class="item" *ngFor="let item of verify">
-        <img src="{{item.img_path}}"/>
+        <img src="/media/{{item.img_path}}"/>
       </div>
   </owl-carousel>
 </section>
