@@ -12,6 +12,8 @@ import { existsSync } from 'fs';
 import {json, urlencoded} from 'body-parser'
 import {createPool} from 'mysql'
 
+let proxy = require('express-http-proxy');
+
 const connection = createPool({
   connectionLimit : 10,
   host: '92.53.96.120',
@@ -45,6 +47,8 @@ export function app(): express.Express {
 
   server.set('view engine', 'html');
   server.set('views', distFolder);
+
+  server.get('/media/**', proxy('https://psk-development.ru/'))
 
   server.get('/api/build', (req, res) => {
     connection.query('SELECT description FROM `categories_build` ORDER BY id DESC LIMIT 1', function(err, rows, fields) {

@@ -14,7 +14,7 @@
     <div class="container">
       <div class="left">
         <div class="logo">
-          <a><img src="assets/images/logo.jpg"/></a>
+          <a href="/"><img src="assets/images/logo.jpg"/></a>
         </div>
       </div>
       <div class="right">
@@ -38,7 +38,7 @@
 
 
 <footer>
-  <div class="container">
+  <div class="container" *ngIf="contact">
     <p class="address">Адрес: <span>{{contact.address}}</span></p>
     <p>Телефон: <span><a href="tel:{{contact.phone}}">{{contact.phone}}</a></span></p>
     <p>Email: <span><a href="mailto:{{contact.email}}">{{contact.email}}</a></span></p>

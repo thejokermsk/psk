@@ -32,15 +32,28 @@ export class IndexPageComponent implements OnInit, OnDestroy{
 
       this.oSub = this.otherService.getVerify().subscribe(items => {
         this.verify = items
+
+
+        if (this.verify.length === 0) {
+          document.querySelector('a[href="#verify"]').style.display = 'none'
+        }
       })
-      
+
       this.oSub = this.otherService.getBuild().subscribe(item => {
         this.build = item
+
+        if (!this.build) {
+          document.querySelector('a[href="#build"]').style.display = 'none'
+        }
       })
 
 
       this.oSub = this.otherService.getContact().subscribe(item => {
         this.contact = item
+
+        if (!this.contact) {
+          document.querySelector('a[href="#callback"]').style.display = 'none'
+        }
       })
 
 

@@ -28,7 +28,7 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    if (this.isBrowser) { 
+    if (this.isBrowser) {
       this.oSub = this.otherService.getContact().subscribe(item => {
         this.contact = item
       })
@@ -38,5 +38,5 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.oSub) this.oSub.unsubscribe()
   }
-  
+
 }
