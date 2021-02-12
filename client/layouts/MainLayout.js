@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { Modal } from '../components/Modal'
 
 export function MainLayout({ children, address = '', phone = '', email = '' }) {
   return (
@@ -16,7 +17,7 @@ export function MainLayout({ children, address = '', phone = '', email = '' }) {
         <div className="header-top">
           <div className="container">
             <div className="left">
-              <a className="header-top__link">Заказать звонок</a>
+              <Modal text="Заказать звонок" stylesName="header-top__link"/>
             </div>
             <div className="right">
               { address.length !== 0 && <p className="address">Адрес: <span> {address} </span></p> }
@@ -49,7 +50,6 @@ export function MainLayout({ children, address = '', phone = '', email = '' }) {
           {children}
         </div>
       </main>
-
 
       <footer>
         <div className="container">

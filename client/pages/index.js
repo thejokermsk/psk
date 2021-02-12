@@ -1,7 +1,11 @@
 import dynamic from 'next/dynamic'
+
+import * as React from 'react';
+
 import { MainLayout } from "../layouts/MainLayout";
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
+import { Modal } from '../components/Modal';
 
 const OwlCarousel = dynamic(() => import('react-owl-carousel') , {ssr: false})
 
@@ -12,12 +16,13 @@ export default function Home({
   slider, 
   verify 
 }) {
+
   return (
     <MainLayout address={contact.address} phone={contact.phone} email={contact.email}> 
       {slider.length !== 0 &&
       <OwlCarousel className='owl-theme row sliding' loop items={1} margin={10}>
         {slider.map((img, idx) => (
-          <div class='item' key={idx}>
+          <div className='item' key={idx}>
             <img src={"/media/" + img.img_path}/>
           </div>
         ))}
@@ -46,12 +51,9 @@ export default function Home({
               <div className="page-item" key={category.id}>
                 <img src={'media/' + category.img_path}/>
                 <p>{category.name}</p>
-                {!category.callback &&
-                  <a>Оставить заявку</a>
-                }
 
-                {category.callback &&
-                  <a>Посмотреть</a>
+                {!category.callback &&
+                  <Modal text="Оставить заявку" service={category.name} />
                 }
               </div>
             ))}
@@ -86,7 +88,7 @@ export default function Home({
         >
 
         {verify.map((img, idx) => (
-          <div class='item' key={idx}>
+          <div className='item' key={idx}>
             <img src={"/media/" + img.img_path}/>
           </div>
         ))}
@@ -136,7 +138,6 @@ export default function Home({
 
       </div>
     </section>
-
 
     </MainLayout>
   )
