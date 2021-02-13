@@ -21,7 +21,7 @@ export default async (req, res) => {
   
   let result = await transporter.sendMail({
     from: '"Поддержка ПСК-Девелопмент" <support@psk-development.ru>',
-    to: "thejoker.msk@icloud.com",
+    to: "thejoker.msk@icloud.com, info@psk-development.ru",
     subject: "Заказ обратного звонка",
     text: "Заказ обратного звонка с сайта psk-development.ru",
     html: `
@@ -30,7 +30,7 @@ export default async (req, res) => {
       <p><strong>Имя:</strong> ${name} </p>
       <p><strong>Email:</strong> ${email} </p>
       <p><strong>Телефон:</strong> ${phone} </p>
-      <p><strong>Комментарий:</strong> ${comment} </p>
+      <p>${comment ? '<strong>Комментарий:</strong> ' + comment : ''}</p>
     
     `
   });

@@ -3,10 +3,18 @@ import dynamic from 'next/dynamic'
 import * as React from 'react';
 
 import { MainLayout } from "../layouts/MainLayout";
+import { Modal } from '../components/Modal';
+import { useForm } from "react-hook-form";
+
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/core/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
-import { Modal } from '../components/Modal';
-
 const OwlCarousel = dynamic(() => import('react-owl-carousel') , {ssr: false})
 
 export default function Home({ 
@@ -17,8 +25,89 @@ export default function Home({
   verify 
 }) {
 
+  const [alert, setAlert] = React.useState({
+    state: false,
+    severity: 'success',
+    message: 'Ваша заявка принята в ближайшее время с вами свяжется наш менеджер!'
+  });
+
+  const { register, handleSubmit, reset } = useForm();
+
+  const handleCloseAlert = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setAlert({
+      state: false,
+      severity: alert.severity,
+      message: alert.message
+    });
+  };
+
+  let disabled = false
+
+  const onSubmit = formData => {
+    if (disabled) return;
+    if (
+      formData.name.length === 0 ||
+      formData.email.length === 0 ||
+      formData.phone.length === 0
+    ) {
+      setAlert({
+        state: true,
+        severity: 'error',
+        message: 'Проверьте правильность заполнения полей'
+      })
+      return
+    }
+
+    disabled = true;
+
+    fetch("/api/callback", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    }).then((res) => {
+      if (res.status === 200) {
+
+        reset()
+        setAlert({
+          state: true,
+          severity: 'success',
+          message: 'Ваша заявка принята в ближайшее время с вами свяжется наш менеджер!'
+        })
+        disabled = false;
+        return
+
+      } else {
+        disabled = false
+        setAlert({
+          state: true,
+          severity: 'error',
+          message: 'Internal Server Error. Попробуйте отправить заявку позже!'
+        })
+        return
+      }
+    })
+  } 
+
   return (
     <MainLayout address={contact.address} phone={contact.phone} email={contact.email}> 
+      <Snackbar 
+        open={alert.state} 
+        autoHideDuration={3000} 
+        onClose={handleCloseAlert}
+        anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+      >
+        <Alert onClose={handleCloseAlert} severity={alert.severity}>
+          {alert.message}
+        </Alert>
+      </Snackbar>
+
       {slider.length !== 0 &&
       <OwlCarousel className='owl-theme row sliding' loop items={1} margin={10}>
         {slider.map((img, idx) => (
@@ -112,27 +201,29 @@ export default function Home({
           <p>Email: <br/> <span><a href={'mailto:' + contact.email}>{contact.email}</a></span></p>
         </div>
         <div className="right page--bg-blue">
-          <div className="input-field">
-            <label htmlFor="first_name">Ваше имя:</label>
-            <input id="first_name" type="text"  required/>
-          </div>
-          <div className="input-field">
-            <label htmlFor="email">Ваш e-mail:</label>
-            <input id="email" type="email" required/>
-          </div>
-          <div className="input-field">
-            <label htmlFor="phone">Ваш телефон:</label>
-            <input id="phone" type="text"/>
-          </div>
-          <div className="input-field">
-            <label htmlFor="message">Вашe сообщение:</label>
-            <textarea id="message" aria-required></textarea>
-          </div>
-          <div className="wrap">
-            <button>
-              Оставить заявку
-            </button>
-          </div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="input-field">
+              <label htmlFor="name">Ваше имя:</label>
+              <input id="name" name="name" ref={register} type="text"  required/>
+            </div>
+            <div className="input-field">
+              <label htmlFor="email">Ваш e-mail:</label>
+              <input id="email" name="email" ref={register} type="email" required/>
+            </div>
+            <div className="input-field">
+              <label htmlFor="phone">Ваш телефон:</label>
+              <input id="phone"  name="phone" ref={register} type="text" required/>
+            </div>
+            <div className="input-field">
+              <label htmlFor="message">Вашe сообщение:</label>
+              <textarea id="message" name="message" ref={register} ></textarea>
+            </div>
+            <div className="wrap">
+              <button type="submit">
+                Оставить заявку
+              </button>
+            </div>
+          </form>
         </div>
 
 
